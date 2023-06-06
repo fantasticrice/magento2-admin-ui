@@ -13,6 +13,11 @@ use Psr\Log\LoggerInterface;
 class DecodeComponentValue
 {
     /**
+     * @see Grasch_AdminUi/js/widget/form/element/sync-field
+     */
+    const PREFIX = 'encodedComponentsData|';
+
+    /**
      * @var SerializerInterface
      */
     private SerializerInterface $serializer;
@@ -43,6 +48,15 @@ class DecodeComponentValue
     }
 
     /**
+     * @param string $data
+     * @return bool
+     */
+    public function isEncoded(string $data): bool
+    {
+        return substr($data, 0, strlen(self::PREFIX)) === self::PREFIX;
+    }
+
+    /**
      * Decode component value
      *
      * @param string $value
@@ -50,14 +64,14 @@ class DecodeComponentValue
      */
     public function execute(string $value): array
     {
-        if (preg_match('/encodedComponentsData\|.*/', $value)) {
-            $value = preg_replace('/encodedComponentsData\|/', '', $value);
+        if ($this->isEncoded($value)) {
+            list($prefix, $value) = explode('|', $value);
             try {
                 $value = $this->base64->decode($value);
                 $value = $this->serializer->unserialize($value);
             } catch (LocalizedException $e) {
                 $this->logger->error($e->getMessage());
-            };
+            }
         }
 
         return $value;

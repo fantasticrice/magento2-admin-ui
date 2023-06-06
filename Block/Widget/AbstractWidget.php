@@ -38,12 +38,12 @@ abstract class AbstractWidget extends Template
      */
     public function getData($key = '', $index = null)
     {
-        $result = parent::getData($key, $index);
-
-        if (!$result || !is_string($result)) {
-            return $result;
+        $data = $this->_getData($key);
+        if (is_string($data) && $this->decodeComponentValue->isEncoded($data)) {
+            $decoded = $this->decodeComponentValue->execute($data);
+            return isset($index)? $decoded[$index] : $decoded;
         }
 
-        return $this->decodeComponentValue->execute($result);
+        return parent::getData($key, $index);
     }
 }
