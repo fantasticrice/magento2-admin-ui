@@ -41,7 +41,7 @@ abstract class AbstractWidget extends Template
         $data = $this->_getData($key);
         if (is_string($data) && $this->decodeComponentValue->isEncoded($data)) {
             $decoded = $this->decodeComponentValue->execute($data);
-            return isset($index)? $decoded[$index] : $decoded;
+            return isset($index)? $decoded[$index]?? null : $decoded;
         }
 
         return parent::getData($key, $index);
