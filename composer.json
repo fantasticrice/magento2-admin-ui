@@ -1,6 +1,6 @@
 {
     "name": "grasch/module-admin-ui",
-    "description": "N/A",
+    "description": "Allow you to use UI components as input for widgets.",
     "type": "magento2-module",
     "require": {
         "php": "~7.4.0 || ^8.0",
