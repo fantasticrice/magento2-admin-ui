@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Grasch\AdminUi\Plugin\Magento\Widget\Block\Adminhtml\Widget\Options;
 
 use Grasch\AdminUi\Model\DecodeComponentValue;
+use Grasch\AdminUi\Block\Adminhtml\Widget\Ui\Components;
 use Magento\Widget\Block\Adminhtml\Widget\Options;
 
 class DecodeComponentValues
