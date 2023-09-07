@@ -42,6 +42,7 @@ class DecodeComponentValues
         // Only decode widget parameters that are encoded
         $config = $subject->getWidgetInstance()?->getWidgetConfigAsArray()??
             $this->widget->getConfigAsObject($subject->getWidgetType());
+
         foreach ($result as $field => &$value) {
             $helperBlock = $config['parameters'][$field]['helper_block']?? null;
             if (isset($helperBlock) && $helperBlock['type'] === Components::class) {
