@@ -14,13 +14,18 @@ class DecodeComponentValues
      * @var DecodeComponentValue
      */
     private DecodeComponentValue $decodeComponentValue;
+
+    /**
+     * @var Widget
+     */
     private Widget $widget;
 
     /**
      * @param DecodeComponentValue $decodeComponentValue
      * @param Widget $widget
      */
-    public function __construct(DecodeComponentValue $decodeComponentValue, Widget $widget) {
+    public function __construct(DecodeComponentValue $decodeComponentValue, Widget $widget)
+    {
         $this->decodeComponentValue = $decodeComponentValue;
         $this->widget = $widget;
     }
@@ -40,8 +45,9 @@ class DecodeComponentValues
         }
 
         // Only decode widget parameters that are encoded
-        $config = $subject->getWidgetInstance()?->getWidgetConfigAsArray()??
-            $this->widget->getConfigAsObject($subject->getWidgetType());
+        $config = $subject->hasWidgetInstance()
+            ? $subject->getWidgetInstance()->getWidgetConfigAsArray()
+            : $this->widget->getConfigAsObject($subject->getWidgetType());
 
         foreach ($result as $field => &$value) {
             $helperBlock = $config['parameters'][$field]['helper_block']?? null;
