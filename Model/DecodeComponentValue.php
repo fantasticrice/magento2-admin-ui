@@ -1,7 +1,4 @@
 <?php
-/**
- * Copyright © InComm, Inc. All rights reserved.
- */
 declare(strict_types=1);
 
 namespace Grasch\AdminUi\Model;
@@ -60,9 +57,9 @@ class DecodeComponentValue
      * Decode component value
      *
      * @param string $value
-     * @return array
+     * @return mixed
      */
-    public function execute(string $value): array
+    public function execute(string $value)
     {
         if ($this->isEncoded($value)) {
             list($prefix, $value) = explode('|', $value);
